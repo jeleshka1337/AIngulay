@@ -6,7 +6,7 @@ API_KEY = "AQVNwJP4ui_MQLkK0ztDhhS9PpaH3Q_aDG1DJMyY"  # API-ключ из Yandex
 FOLDER_ID = "b1gpngivlee1eh4et6e8"  # Folder ID из Yandex Cloud
 
 # Поисковый запрос
-query = "Когда ИТМО получил статус национального исследовательского университета?"
+query = "В каком городе находится ИТМО?"
 
 # URL для запроса к Yandex Search API
 url = f"https://yandex.ru/search/xml?folderid={FOLDER_ID}&apikey={API_KEY}&query={query}"
