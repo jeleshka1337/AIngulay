@@ -17,6 +17,7 @@ llmKey = "bce91e4ed5572b77111017a24e3a8791e947770f4e2273eba81c6383773bb732"
 #запрос в API
 def search1(query):
     url = f"https://yandex.ru/search/xml?folderid={folderId}&apikey={apiKey}&query={query}"
+    print("url: " + str(url))
     parameters = {
         "text": query,
         "lang": "ru",
@@ -30,7 +31,7 @@ def search1(query):
 
     try:
         #отправка запроса, парсинг
-        response = requests.get(url, params=parameters, headers=headers, timeout=1)
+        response = requests.get(url, params=parameters, headers=headers, timeout=5)
         print(response)
         response.raise_for_status()
         root = El.fromstring(response.text)
