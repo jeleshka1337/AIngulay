@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import requests
+import os
 import xml.etree.ElementTree as El
 import logging
 
@@ -14,9 +15,9 @@ class Request(BaseModel):
     id: int
 
 #url для запроса
-folderId = "b1gpngivlee1eh4et6e8"
-apiKey = "AQVNwJP4ui_MQLkK0ztDhhS9PpaH3Q_aDG1DJMyY"
-llmKey = "bce91e4ed5572b77111017a24e3a8791e947770f4e2273eba81c6383773bb732"
+folderId = os.getenv("FOLDER_ID")
+apiKey = os.getenv("API_KEY")
+llmKey = os.getenv("DEEPSEEK_API_KEY")
 
 #запрос в API
 def search(query):
