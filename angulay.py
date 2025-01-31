@@ -1,48 +1,37 @@
+from fastapi import FastAPI
+from pydantic import BaseModel
+import os
 import requests
-import xml.etree.ElementTree as ET
+import xml.etree.ElementTree as El
 
-# Ваши данные для авторизации
-API_KEY = "AQVNwJP4ui_MQLkK0ztDhhS9PpaH3Q_aDG1DJMyY"  # API-ключ из Yandex Cloud
-FOLDER_ID = "b1gpngivlee1eh4et6e8"  # Folder ID из Yandex Cloud
-
-# Поисковый запрос
-query = "В каком городе находится ИТМО?"
-
-# URL для запроса к Yandex Search API
-url = f"https://yandex.ru/search/xml?folderid={FOLDER_ID}&apikey={API_KEY}&query={query}"
-
-# Параметры запроса
+#url для запроса
+folderId = "b1gpngivlee1eh4et6e8"
+apiKey = "AQVNwJP4ui_MQLkK0ztDhhS9PpaH3Q_aDG1DJMyY"
+question = "К какому мегафакультету ИТМО принадлежит СУиР? 1. КТиУ 2. Ангуляй 3. ФТМИ 4. 17"
+url = f"https://yandex.ru/search/xml?folderid={folderId}&apikey={apiKey}&query={question}"
 params = {
-    "text": query,
+    "text": question,
     "lang": "ru",
     "type": "web",
-    "limit": 1,
+    "limit": 1
 }
 
-# Добавляем правильные заголовки
 headers = {
     'Content-Type': 'application/x-www-form-urlencoded',
     'User-Agent': 'Mozilla/5.0'
 }
 
 try:
-    # Отправка GET-запроса с параметрами в URL
+    #отправка запроса, парсинг
     response = requests.get(url, params=params, timeout=1)
     response.raise_for_status()
-
-     # Выводим полученный XML
-    print("Полученный XML ответ:")
+    print("XML ответ:")
     print(response.text)
     print("-" * 50)
-
-    # Парсинг XML ответа
-    root = ET.fromstring(response.text)
-    
-    
-    # Поиск результатов в XML
+    root = El.fromstring(response.text)
     results = root.findall('.//doc')
     
-    # Выводим только первые три результата
+    #
     if results:
         for i, doc in enumerate(results[:3]):
             title = doc.find('title').text if doc.find('title') is not None else 'Нет заголовка'
@@ -52,15 +41,18 @@ try:
             extended_text = doc.find('.//extended-text')
             extended = extended_text.text if extended_text is not None and extended_text.text else 'Нет расширенного описания'
             
+            print("XML ответ:")
+            print(response.text)
+            print("-" * 50)
             print(f"\nРезультат {i+1}:")
             print(f"Title: {title}")
             print(f"URL: {url}")
             print(f"Extended text: {extended}")
             print("-" * 50)
 
-except requests.exceptions.RequestException as e:
-    print(f"Ошибка при выполнении запроса: {e}")
-except ET.ParseError as e:
-    print(f"Ошибка при парсинге XML: {e}")
-except Exception as e:
-    print(f"Неожиданная ошибка: {e}")
+except requests.exceptions.RequestException as errorType:
+    print(f"Ошибка при выполнении запроса: {errorType}")
+except El.ParseError as errorType:
+    print(f"Ошибка при парсинге XML: {errorType}")
+except Exception as errorType:
+    print(f"Неожиданная ошибка: {errorType}")
