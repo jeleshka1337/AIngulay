@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import os
 import requests
 import xml.etree.ElementTree as El
 
