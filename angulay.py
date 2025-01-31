@@ -48,7 +48,7 @@ def search(query):
                 "url": url,
                 "snippet": snippet
             })
-
+        print(answers)
         return answers
     
     except requests.exceptions.RequestException as errorType:
@@ -84,8 +84,8 @@ def llmQuery(query, sources):
     data = {
         "model": "meta-llama/Llama-3.3-70B-Instruct-Turbo",
         "messages": [{"role": "user", "content": llmInstr}],
-        "temperature": 0.3,
-        "max_tokens": 15
+        "temperature": 0.5,
+        "max_tokens": 10
     }
 
     response = requests.post(url, headers=headers, json=data)
