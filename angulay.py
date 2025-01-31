@@ -48,7 +48,6 @@ def search(query):
                 "url": url,
                 "snippet": snippet
             })
-        print(answers)
         return answers
     
     except requests.exceptions.RequestException as errorType:
