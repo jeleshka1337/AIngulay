@@ -63,8 +63,8 @@ def search(query):
 
 #запрос в LLM
 def llmQuery(query, sources):
-    url = "https://api.together.xyz/v1/chat/completions"
-    headers = {
+    URL = "https://api.together.xyz/v1/chat/completions"
+    HEADERS = {
         "Authorization": f"Bearer {llmKey}",
         "Content-Type": "application/json"
     }
@@ -88,7 +88,7 @@ def llmQuery(query, sources):
         "max_tokens": 10
     }
 
-    response = requests.post(url, headers=headers, json=data)
+    response = requests.post(URL, headers=HEADERS, json=data)
     
     if response.status_code == 200:
         res = (response.json()["choices"][0]["message"]["content"], reasoningSrc)
