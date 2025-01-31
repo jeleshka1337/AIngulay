@@ -15,7 +15,7 @@ apiKey = "AQVNwJP4ui_MQLkK0ztDhhS9PpaH3Q_aDG1DJMyY"
 llmKey = "bce91e4ed5572b77111017a24e3a8791e947770f4e2273eba81c6383773bb732"
 
 #запрос в API
-def search(query):
+def search1(query):
     url = f"https://yandex.ru/search/xml?folderid={folderId}&apikey={apiKey}&query={query}"
     parameters = {
         "text": query,
@@ -98,7 +98,7 @@ def llmQuery(query, sources):
 #формирование и обоснование ответа
 @app.post("/api/request")
 def search_api(request: Request):
-    results = search(request.query)
+    results = search1(request.query)
 
     if not results:
         return {"id": request.id, "answer": None, "reasoning": "Сегодня без данных", "sources": []}
