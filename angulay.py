@@ -13,7 +13,7 @@ class Request(BaseModel):
 #url для запроса
 folderId = "b1gpngivlee1eh4et6e8"
 apiKey = "AQVNwJP4ui_MQLkK0ztDhhS9PpaH3Q_aDG1DJMyY"
-llmKey = "meta-llama/Llama-3.3-70B-Instruct-Turbo"
+llmKey = "bce91e4ed5572b77111017a24e3a8791e947770f4e2273eba81c6383773bb732"
 
 #запрос в API
 def search(query):
