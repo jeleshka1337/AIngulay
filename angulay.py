@@ -31,6 +31,7 @@ def search(query):
     try:
         #отправка запроса, парсинг
         response = requests.get(url, params=parameters, headers=headers, timeout=1)
+        print(response)
         response.raise_for_status()
         root = El.fromstring(response.text)
         answers = []
